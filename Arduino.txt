@@ -6,7 +6,7 @@ git status
 
 git add . && git commit -m "Add new files"
 
-repozytorium skopiuj z GitHub np. -
+repozytorium skopiuj z GitHub np. - git remote add origin https://github.com/mateuszlanduch/ArduinoProject.git
 
-i wypchnij pliki do repozytorium komenda -
+i wypchnij pliki do repozytorium komenda - git push -u origin master
 
