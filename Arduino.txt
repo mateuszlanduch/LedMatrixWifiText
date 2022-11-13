@@ -1,0 +1,12 @@
+Git Bash Here
+
+git init 	odpowiedzialna za utworzenie folderu
+
+git status 	
+
+git add . && git commit -m "Add new files"
+
+repozytorium skopiuj z GitHub np. -
+
+i wypchnij pliki do repozytorium komenda -
+
