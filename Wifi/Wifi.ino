@@ -22,22 +22,28 @@ Matrix LED 8x32
 #define PIN 26
 
 //provide your own WiFi SSID and password
-const char* ssid = "Mefiu";
-const char* password = "Qwe12334";
+const char* ssid = "Yourssid";
+const char* password = "Yourpassword";
 
-Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(32, 8, PIN,
+Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(40, 8, PIN,
                                                NEO_MATRIX_BOTTOM + NEO_MATRIX_RIGHT + NEO_MATRIX_COLUMNS + NEO_MATRIX_ZIGZAG,
                                                NEO_GRB + NEO_KHZ800);
 
 const uint16_t colors[] = {
-  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255)
+  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255), matrix.Color(255, 255, 255), matrix.Color(0,255, 255), matrix.Color(255, 0, 255), matrix.Color(255, 255, 0)
 };
 
 //Create WebServer instance
 WebServer server(80);
 
+int x = matrix.width();
+int pass = 0;
 //Initialize message to display
 String message = "";
+int len = message.length();
+int len2 = 30;
+int len3 = len + len2;
+
 
 void setup() {
   //This uses EEPROM to store previous message
@@ -88,6 +94,7 @@ void setup() {
   //Print stored message to serial port for checking
   Serial.print("Stored message: ");
   Serial.println(message);
+  matrix.print("Hello World");
 }
 
 //function for handling POST data
@@ -103,20 +110,20 @@ void dataHandler() {
   server.sendHeader("Location", "/");  //redirect client to home page
   server.send(303);                    //redirect http code
 }
-  int x = matrix.width();
-  int pass = 0;
+
 void loop() {
   //int len = message.length();         //get message length
   server.handleClient();  //make the ESP32 respond to web clients
   matrix.fillScreen(0);
   matrix.setCursor(x, 0);
   matrix.print(message);
-  //if(len > 100) return;
-  if (--x < -130) {
+  //if(len > 100) return; 175
+  if (--x < -160) {
     x = matrix.width();
-    if (++pass >= 3) pass = 0;
+    if (++pass >= 7) pass = 0;
     matrix.setTextColor(colors[pass]);
   }
   matrix.show();
   delay(90);
+  
 }
